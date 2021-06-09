@@ -68,6 +68,8 @@ async def on_message(message):
     return
 
   msg = message.content
+  
+  prefix = os.environ['PREFIX']
 
   if msg.startswith('$inspire'):
     quote = get_quote()
@@ -109,6 +111,20 @@ async def on_message(message):
     else:
       db["responding"] = False
       await message.channel.send("Responding is off.")
+
+  # vérifie que le préfix a été invoqué
+  if msg.startswith(prefix):
+
+    #récupère command, la commande entrée
+    prefixless = msg.replace(prefix, '')
+    msg_splitted = prefixless.split(" ")
+    command = msg_splitted[0]
+    fileName = "commands/"+command+".py"
+    fileExist = os.path.isfile(fileName)
+    if fileExist==True:
+      await message.channel.send("bon toutou")
+      from commands.command import ping
+      ping(msg, message)
 
 keep_alive()
 client.run(os.environ['TOKEN'])

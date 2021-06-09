@@ -7,6 +7,8 @@ authors = ["0Nemo <<>>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 discord = "^1.0.1"
+flask = "^2.0.1"
+replit = "^3.1.0"
 
 [tool.poetry.dev-dependencies]
 
